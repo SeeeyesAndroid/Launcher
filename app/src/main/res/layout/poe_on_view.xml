@@ -16,7 +16,7 @@
         android:paddingLeft="18dp"
         android:paddingTop="10dp"
         android:paddingRight="18dp"
-        android:text="PoE : 48V ON"
+        android:text="PoE Checking"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffff"
         android:typeface="monospace"

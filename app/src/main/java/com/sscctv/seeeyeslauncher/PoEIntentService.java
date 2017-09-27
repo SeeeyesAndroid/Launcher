@@ -87,7 +87,7 @@ public class PoEIntentService extends IntentService {
         LayoutInflater poe_Inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mPoeView = poe_Inflater.inflate(R.layout.poe_on_view, null);
         mPoeLevel = (TextView) mPoeView.findViewById(R.id.mp_poe_level);
-        //mPoeView.setOnTouchListener(mViewTouchListener);
+        mPoeView.setOnTouchListener(mViewTouchListener);
         mParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
                                                     WindowManager.LayoutParams.WRAP_CONTENT, 0, 20,
                                                     WindowManager.LayoutParams.TYPE_PHONE,
@@ -96,7 +96,7 @@ public class PoEIntentService extends IntentService {
         mParams.gravity =  Gravity.TOP | Gravity.CENTER;
         mManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mManager.addView(mPoeView, mParams);
-        mPoeView.setVisibility(View.VISIBLE);
+        mPoeView.setVisibility(View.INVISIBLE);
 
         LayoutInflater mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mFocusPoeView = mInflater.inflate(R.layout.poe_foucs_view, null);
@@ -111,7 +111,7 @@ public class PoEIntentService extends IntentService {
         sParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
         sManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         sManager.addView(mFocusPoeView, sParams);
-        mFocusPoeView.setVisibility(View.GONE);
+        mFocusPoeView.setVisibility(View.INVISIBLE);
     }
 
     public PoEIntentService() {
@@ -166,11 +166,6 @@ public class PoEIntentService extends IntentService {
             public void onReceive(Context context, Intent intent) {
                 String state = intent.getStringExtra("state");
                 String focus = intent.getStringExtra("focus");
-
-//                utility.logd(sLogTag, "Broadcast Receiver Start");
-//                utility.logd(sLogTag, "Focus Reset Broadcast : " + focus);
-//                utility.logd(sLogTag, "Full Screen Broadcast : " + state);
-
                 if(state != null && state.equals("resume")){
                     pfview = true;
                     mPoeView.setVisibility(View.INVISIBLE);
@@ -262,7 +257,7 @@ public class PoEIntentService extends IntentService {
                                             mFocus = value;
                                             break;
                                     }
-//                                    utility.logd(sLogTag, ("PoE Volt: "+ mValue + " . " + sValue + " V "));
+                                    utility.logd(sLogTag, ("PoE Volt: "+ mValue + " . " + sValue + " V "));
 //                                    utility.logd(sLogTag, ("Pse State = "+ mSource.getPseState() + " Vp State = " + mSource.getVpState()));
                                     Message poe_msg = poe_handler.obtainMessage();
                                     Message poe_focus_msg = poe_focus_handler.obtainMessage();
@@ -303,17 +298,25 @@ public class PoEIntentService extends IntentService {
 
     final Handler poe_handler = new Handler() {
         public void handleMessage(Message msg) {
+            mPoeView.setVisibility(View.VISIBLE);
             switch (mSource.getPseState()) {
                 case 0:
-                    mPoeView.setVisibility(View.VISIBLE);
                     if(mValue == 0) {
-                        mPoeLevel.setText(String.format("PoE : 48V ON"));
+                        mPoeLevel.setText(String.format("PoE 48V OUT"));
+                        utility.logd(sLogTag, "Home Menu, PSE 0(ON), Not Use PoE CHeck");
                     } else {
                         mPoeLevel.setText(String.format("PoE : %02d.%02d V", mValue, sValue));
+                        utility.logd(sLogTag, "mValue = " + mValue + " " + "sValue = " + sValue);
+                        utility.logd(sLogTag, "Home Menu, PSE 0(ON), Use PoE Check");
                     }
                     break;
                 case 1:
-                    mPoeView.setVisibility(View.INVISIBLE);
+                    if(mValue == 0) {
+                        mPoeLevel.setText(String.format("PoE OFF"));
+                        utility.logd(sLogTag, "Home Menu, PSE 1(OFF)");
+                    } else {
+                        utility.logd(sLogTag, "Home Menu, PSE 1(OFF), Use PoE Check");
+                    }
                     break;
             }
         }
@@ -325,15 +328,26 @@ public class PoEIntentService extends IntentService {
                 case 0:
                     mFocusPoeView.setVisibility(View.VISIBLE);
                     if(mValue == 0) {
-                        mFocusPoeLevel.setText(String.format("PoE   : 48V ON"));
+                        mFocusPoeLevel.setText(String.format("PoE   : 48V OUT"));
+                        utility.logd(sLogTag, "Focus Home Menu, PSE 0(ON), Not Use PoE CHeck");
                         updateFocusLevel(mFocus);
                     } else {
                         mFocusPoeLevel.setText(String.format("PoE   : %02d.%02d V", mValue, sValue));
+                        utility.logd(sLogTag, "Focus Home Menu, PSE 0(ON), Use PoE CHeck");
                         updateFocusLevel(mFocus);
                     }
                     break;
                 case 1:
-                    mFocusPoeView.setVisibility(View.INVISIBLE);
+                    mFocusPoeView.setVisibility(View.VISIBLE);
+                    if(mValue == 0) {
+                        mFocusPoeLevel.setText(String.format("PoE   : OFF"));
+                        utility.logd(sLogTag, "Focus Home Menu, PSE 1(OFF), Not Use PoE CHeck");
+                        updateFocusLevel(mFocus);
+                    } else {
+                        mFocusPoeLevel.setText(String.format("PoE   : OFF"));
+                        utility.logd(sLogTag, "Focus Home Menu, PSE 01(OFF), Use PoE CHeck");
+                        updateFocusLevel(mFocus);
+                    }
                     break;
             }
         }
