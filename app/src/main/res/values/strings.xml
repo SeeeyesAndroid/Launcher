@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Home menu</string>
+
+    <string name="apps_name">Applications</string>
+
+    <string name="grid_icon">App Icon</string>
+
+    <string name="app_ipcamera">IP Camera</string>
+    <string name="app_sdi">SDI</string>
+    <string name="app_hdmi">HDMI</string>
+    <string name="app_apps">Applications</string>
+    <string name="app_ahd">AHD</string>
+    <string name="app_tvi">TVI</string>
+    <string name="app_cvbs">CVBS</string>
+    <string name="app_cvi">CVI</string>
+    <string name="app_settings">Settings</string>
+
+    <string name="title_settings" translatable="false">Settings</string>
+    <string name="title_language">Please select a language to apply</string>
+    <string name="language_korean" translatable="false">한국어</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_english">English</string>
+    <string name="language_italian" translatable="false">Italiano</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="next">Next</string>
+
+    <string name="network_configuration_guide_name" translatable="false">Network Configuration Guide</string>
+    <string name="network_configuration_guide_first" translatable="false">1. Use Ethernet should always be selected.</string>
+    <string name="network_configuration_guide_second" translatable="false">2. Click Advanced Configure to set up the network information for the IP Monitor.</string>
+
+
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--     <array name="app_icons">
+           <item>@drawable/ic_camera</item>
+            <item>@drawable/ic_sdi</item>
+            <item>@drawable/ic_hdmi</item>
+            <item>@drawable/ic_apps</item>
+            <item>@drawable/ic_ahd</item>
+            <item>@drawable/ic_tvi</item>
+            <item>@drawable/ic_cvi</item>
+            <item>@drawable/ic_cvbs</item>
+        </array>
+    -->
+
+    <!--<array name="app_icons">
+       <item>@drawable/a</item>
+       <item>@drawable/b</item>
+       <item>@drawable/c</item>
+       <item>@drawable/d</item>
+       <item>@drawable/e</item>
+       <item>@drawable/f</item>
+       <item>@drawable/g</item>
+       <item>@drawable/h</item>
+   </array>
+   -->
+
+    <string-array name="app_labels">
+        <item>@string/app_ipcamera</item>
+        <item>@string/app_sdi</item>
+        <item>@string/app_hdmi</item>
+        <item>@string/app_apps</item>
+        <item>@string/app_ahd</item>
+        <item>@string/app_tvi</item>
+        <item>@string/app_cvi</item>
+        <item>@string/app_cvbs</item>
+
+    </string-array>
+</resources>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/main_vertical_margin"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="@dimen/main_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sscctv.seeeyeslauncher.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:background="@drawable/background">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ip_button"
+        android:background="@drawable/selector_ip"
+        android:layout_marginTop ="75dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sdi_button"
+        android:background="@drawable/selector_sdi"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop ="75dp"
+        android:layout_toEndOf="@+id/ip_button" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hdmi_button"
+        android:background="@drawable/selector_hdmi"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop ="75dp"
+        android:layout_toEndOf="@+id/sdi_button" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/apps_button"
+        android:background="@drawable/selector_apps"
+        android:layout_marginTop ="75dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@+id/hdmi_button" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ahd_button"
+        android:background="@drawable/selector_ahd"
+        android:layout_below="@id/ip_button"
+        android:layout_marginTop="8dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvi_button"
+        android:background="@drawable/selector_tvi"
+        android:layout_below="@id/sdi_button"
+        android:layout_toEndOf="@id/ahd_button"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+       />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cvi_button"
+        android:background="@drawable/selector_cvi"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/hdmi_button"
+        android:layout_toEndOf="@id/tvi_button"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cvbs_button"
+        android:background="@drawable/selector_cvbs"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/apps_button"
+        android:layout_toEndOf="@id/cvi_button" />
+
+ <!-- <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/asdf"
+        android:background="@color/SlateGray"
+        android:text="Language Settings"
+        android:layout_marginLeft="30dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="23dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/asd"
+        android:background="@color/SlateGray"
+        android:text="Network Setting guide"
+        android:layout_marginLeft="30dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/asdf" /> -->
+
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Home menu</string>
+
+    <string name="apps_name">Applications</string>
+
+    <string name="grid_icon">App Icon</string>
+
+    <string name="app_ipcamera">IP Camera</string>
+    <string name="app_sdi">SDI</string>
+    <string name="app_hdmi">HDMI</string>
+    <string name="app_apps">Applications</string>
+    <string name="app_ahd">AHD</string>
+    <string name="app_tvi">TVI</string>
+    <string name="app_cvbs">CVBS</string>
+    <string name="app_settings">Settings</string>
+    <string name="app_cvi">CVI</string>
+    <string name="title_language">Seleziona una lingua da applicare</string>
+    <string name="language_english">English</string>
+    <string name="next">prossimo</string>
+</resources>

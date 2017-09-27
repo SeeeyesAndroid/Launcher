@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Home menu</string>
+
+    <string name="apps_name">アプリ</string>
+
+    <string name="grid_icon">アプリ アイコン</string>
+
+    <string name="app_ipcamera">IPカメラ</string>
+    <string name="app_sdi">SDI</string>
+    <string name="app_hdmi">HDMI</string>
+    <string name="app_apps">アプリ</string>
+    <string name="app_ahd">AHD</string>
+    <string name="app_tvi">TVI</string>
+    <string name="app_cvbs">CVBS</string>
+    <string name="app_settings">設定</string>
+    <string name="app_cvi">CVI</string>
+    <string name="title_language">申し込む言語を選択してください</string>
+    <string name="language_english">English</string>
+    <string name="next">次</string>
+</resources>

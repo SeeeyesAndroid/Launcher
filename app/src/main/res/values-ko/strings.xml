@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Home menu</string>
+
+    <string name="apps_name">애플리케이션</string>
+
+    <string name="grid_icon">앱 아이콘</string>
+
+    <string name="app_ipcamera">IP 카메라</string>
+    <string name="app_sdi">SDI</string>
+    <string name="app_hdmi">HDMI</string>
+    <string name="app_apps">애플리케이션</string>
+    <string name="app_ahd">AHD</string>
+    <string name="app_tvi">TVI</string>
+    <string name="app_cvbs">CVBS</string>
+    <string name="app_settings">설정</string>
+    <string name="app_cvi">CVI</string>
+    <string name="title_language">적용할 언어를 선택하십시오.</string>
+    <string name="language_english">English</string>
+    <string name="next">다음</string>
+</resources>
