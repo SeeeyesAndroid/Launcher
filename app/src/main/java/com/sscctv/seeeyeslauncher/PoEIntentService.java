@@ -27,6 +27,7 @@ import net.biyee.android.utility;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static com.sscctv.seeeyes.VideoSource.IPC;
+import static java.lang.String.format;
 
 public class PoEIntentService extends IntentService {
     private McuControl mMcuControl;
@@ -174,9 +175,7 @@ public class PoEIntentService extends IntentService {
                     mSource.setCvbsOut(!mInit);
                     try {
                         mMcuControl.startLevelMeter();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
                     utility.logd(sLogTag, "Resume pfLevel " + pfview);
@@ -191,9 +190,7 @@ public class PoEIntentService extends IntentService {
                     try {
                         mMcuControl.stopLevelMeter();
                         mMcuControl.startPoeCheck();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
                     utility.logd(sLogTag, "Pause pfLevel " + pfview);
@@ -257,22 +254,22 @@ public class PoEIntentService extends IntentService {
                                             mFocus = value;
                                             break;
                                     }
-                                    utility.logd(sLogTag, ("PoE Volt: "+ mValue + " . " + sValue + " V "));
+//                                    utility.logd(sLogTag, ("PoE Volt: "+ mValue + " . " + sValue + " V "));
 //                                    utility.logd(sLogTag, ("Pse State = "+ mSource.getPseState() + " Vp State = " + mSource.getVpState()));
                                     Message poe_msg = poe_handler.obtainMessage();
                                     Message poe_focus_msg = poe_focus_handler.obtainMessage();
-                                    if (mValue != 0 && pfview == true) {
+                                    if ((mValue != 0) && pfview) {
                                         mSource.vpDisable();
                                         poe_focus_handler.sendMessage(poe_msg);
 //                                        utility.logd(sLogTag, ("Number 1 state"));
-                                    } else if (mValue != 0 && pfview == false){
+                                    } else if ((mValue != 0) && !pfview){
                                         mSource.vpDisable();
                                         poe_handler.sendMessage(poe_focus_msg);
 //                                        utility.logd(sLogTag, ("Number 2 state"));
-                                    } else if (mValue == 0 && pfview == true){
+                                    } else if ((mValue == 0) && pfview){
                                         poe_focus_handler.sendMessage(poe_msg);
 //                                        utility.logd(sLogTag, ("Number 3 state"));
-                                    } else if (mValue == 0 && pfview == false){
+                                    } else if ((mValue == 0) && !pfview){
                                         mSource.vpEnable();
                                         poe_handler.sendMessage(poe_msg);
 //                                        utility.logd(sLogTag, ("Number 4 state"));
@@ -302,20 +299,18 @@ public class PoEIntentService extends IntentService {
             switch (mSource.getPseState()) {
                 case 0:
                     if(mValue == 0) {
-                        mPoeLevel.setText(String.format("PoE 48V OUT"));
-                        utility.logd(sLogTag, "Home Menu, PSE 0(ON), Not Use PoE CHeck");
+                        mPoeLevel.setText("PoE 48V OUT");
+//                        utility.logd(sLogTag, "Home Menu, PSE 0(ON), Not Use PoE CHeck");
                     } else {
-                        mPoeLevel.setText(String.format("PoE : %02d.%02d V", mValue, sValue));
-                        utility.logd(sLogTag, "mValue = " + mValue + " " + "sValue = " + sValue);
-                        utility.logd(sLogTag, "Home Menu, PSE 0(ON), Use PoE Check");
+                        mPoeLevel.setText(format("PoE : %02d.%02d V", mValue, sValue));
+//                        utility.logd(sLogTag, "mValue = " + mValue + " " + "sValue = " + sValue);
+//                        utility.logd(sLogTag, "Home Menu, PSE 0(ON), Use PoE Check");
                     }
                     break;
                 case 1:
                     if(mValue == 0) {
-                        mPoeLevel.setText(String.format("PoE OFF"));
-                        utility.logd(sLogTag, "Home Menu, PSE 1(OFF)");
-                    } else {
-                        utility.logd(sLogTag, "Home Menu, PSE 1(OFF), Use PoE Check");
+                        mPoeLevel.setText("PoE OFF");
+//                        utility.logd(sLogTag, "Home Menu, PSE 1(OFF)");
                     }
                     break;
             }
@@ -328,24 +323,24 @@ public class PoEIntentService extends IntentService {
                 case 0:
                     mFocusPoeView.setVisibility(View.VISIBLE);
                     if(mValue == 0) {
-                        mFocusPoeLevel.setText(String.format("PoE   : 48V OUT"));
-                        utility.logd(sLogTag, "Focus Home Menu, PSE 0(ON), Not Use PoE CHeck");
+                        mFocusPoeLevel.setText("PoE   : 48V OUT");
+//                        utility.logd(sLogTag, "Focus Home Menu, PSE 0(ON), Not Use PoE CHeck");
                         updateFocusLevel(mFocus);
                     } else {
-                        mFocusPoeLevel.setText(String.format("PoE   : %02d.%02d V", mValue, sValue));
-                        utility.logd(sLogTag, "Focus Home Menu, PSE 0(ON), Use PoE CHeck");
+                        mFocusPoeLevel.setText(format("PoE   : %02d.%02d V", mValue, sValue));
+//                        utility.logd(sLogTag, "Focus Home Menu, PSE 0(ON), Use PoE CHeck");
                         updateFocusLevel(mFocus);
                     }
                     break;
                 case 1:
                     mFocusPoeView.setVisibility(View.VISIBLE);
                     if(mValue == 0) {
-                        mFocusPoeLevel.setText(String.format("PoE   : OFF"));
-                        utility.logd(sLogTag, "Focus Home Menu, PSE 1(OFF), Not Use PoE CHeck");
+                        mFocusPoeLevel.setText("PoE   : OFF");
+//                        utility.logd(sLogTag, "Focus Home Menu, PSE 1(OFF), Not Use PoE CHeck");
                         updateFocusLevel(mFocus);
                     } else {
-                        mFocusPoeLevel.setText(String.format("PoE   : OFF"));
-                        utility.logd(sLogTag, "Focus Home Menu, PSE 01(OFF), Use PoE CHeck");
+                        mFocusPoeLevel.setText("PoE   : OFF");
+//                        utility.logd(sLogTag, "Focus Home Menu, PSE 01(OFF), Use PoE CHeck");
                         updateFocusLevel(mFocus);
                     }
                     break;
@@ -357,13 +352,13 @@ public class PoEIntentService extends IntentService {
         if (mFocusLevelMax < focusLevel) {
             mFocusLevelMax = focusLevel;
         }
-        mFocusLevel.setText(String.format("FOCUS : %03d/%03d", focusLevel, mFocusLevelMax));
-        utility.logd(sLogTag, "Focus Level =  " + focusLevel);
+        mFocusLevel.setText(format("FOCUS : %03d/%03d", focusLevel, mFocusLevelMax));
+//        utility.logd(sLogTag, "Focus Level =  " + focusLevel);
     }
 
     public void resetFocusLevel() {
         mFocusLevelMax = 0;
-        mFocusLevel.setText(String.format("FOCUS : %03d/%03d", 0, 0));
+        mFocusLevel.setText(format("FOCUS : %03d/%03d", 0, 0));
     }
     @Override
     protected void onHandleIntent(Intent intent) {
