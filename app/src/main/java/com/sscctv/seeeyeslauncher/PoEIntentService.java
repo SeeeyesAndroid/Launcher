@@ -75,7 +75,7 @@ public class PoEIntentService extends IntentService {
                     sParams.x = mViewX + x;
                     sParams.y = mViewY +y;
                     mManager.updateViewLayout(mPoeView, mParams);
-                    sManager.updateViewLayout(mFocusPoeView,sParams);
+                    //sManager.updateViewLayout(mFocusPoeView,sParams);
                     break;
             }
             return true;
