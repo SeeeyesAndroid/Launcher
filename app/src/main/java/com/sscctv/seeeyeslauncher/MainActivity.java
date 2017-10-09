@@ -21,6 +21,7 @@ import com.sscctv.seeeyes.ptz.McuControl;
 import net.biyee.android.utility;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private McuControl mMcuControl;
     private VideoSource mSource;
     private boolean catchValue = false;
+
     private static final int[] BUTTONS = {
             R.id.ip_button,
             R.id.sdi_button,
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.id.cvbs_button
     };
     private Button mButton, mButton1;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +69,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn.setOnClickListener(this);
         }
 
+
 //    mButton = (Button)findViewById(R.id.asd);
 //    mButton1 = (Button)findViewById(R.id.asdf);
-//        mButton.setOnClickListener(this);
-//        mButton1.setOnClickListener(this);
+//       mButton.setOnClickListener(this);
+//       mButton1.setOnClickListener(this);
 
     }
     @Override
     public void onClick(View v) {
-
         PackageManager pm = getPackageManager();
         Intent intent = null;
 
@@ -85,11 +88,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.sdi_button:
+                stopService();
                 intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
                 intent.putExtra(EXTRA_SOURCE, SOURCE_SDI);
                 break;
 
             case R.id.hdmi_button:
+                stopService();
                 intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
                 intent.putExtra(EXTRA_SOURCE, SOURCE_HDMI);
                 break;
@@ -99,11 +104,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ahd_button:
+                stopService();
                 intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
                 intent.putExtra(EXTRA_SOURCE, SOURCE_AHD);
                 break;
 
             case R.id.tvi_button:
+                stopService();
                 intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
                 intent.putExtra(EXTRA_SOURCE, SOURCE_TVI);
                 break;
@@ -115,23 +122,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.cvbs_button:
+                stopService();
                 intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
                 intent.putExtra(EXTRA_SOURCE, SOURCE_CVBS);
                 break;
 
-//            case R.id.asd:
-//                Intent intent1 = new Intent("android.net.ethernet.ETHERNET_SETTINGS");
-//                startActivity(intent1);
-//
-//                Intent intent2 = new Intent(this, GuideActivity.class);
-//                startActivity(intent2);
-//                break;
-//
-//            case R.id.asdf:
-//                intent = new Intent(this, LanguageSettings.class);
-//                startActivity(intent);
-//                break;
         }
+
         if (intent != null) {
             startActivity(intent);
         }
@@ -175,8 +172,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void unregisterReciver() {
-        if(mReceiver != null);
-           // this.unregisterReceiver(mReceiver);
+        if(mReceiver != null) {
+            this.unregisterReceiver(mReceiver);
+        }
     }
 
     private void startService() {
@@ -190,11 +188,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void stopService() {
         if (catchValue) {
-            catchValue = false;
             Intent poeIntent = new Intent(this, PoEIntentService.class);
             stopService(poeIntent);
             Log.d(TAG, "Stop Catch Value = " + catchValue);
         }
+        catchValue = false;
     }
 
     private void launchApps() {
