@@ -136,6 +136,7 @@ public class PoEIntentService extends IntentService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         utility.LOG = false;
         utility.logd(sLogTag, "Start service in foreground ");
+
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setAction(sAction);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -157,6 +158,8 @@ public class PoEIntentService extends IntentService {
             try {
                 updateFlag = true;
                 pseLevel = false;
+                voltInput = true;
+
                 mSource = new VideoSource(IPC);
 
                 mMcuControl.start(mSource.getSourceId());
@@ -200,7 +203,8 @@ public class PoEIntentService extends IntentService {
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                    utility.logd(sLogTag, "Resume pfLevel " + screenState);
+                    updateFlag = true;
+                    utility.logd(sLogTag, "Resume pfLevel = " + screenState);
                 }
 
                 if (state != null && state.equals("pause")) {
@@ -215,6 +219,7 @@ public class PoEIntentService extends IntentService {
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
+                    updateFlag = true;
                     utility.logd(sLogTag, "Pause pfLevel " + screenState);
 
                 }
@@ -324,8 +329,8 @@ public class PoEIntentService extends IntentService {
                                 mFocus = value;
                                 break;
                         }
-                        utility.logd(sLogTag, ("PoE Volt: " + mValue + " . " + sValue + " V "));
-                        utility.logd(sLogTag, ("Pse State = " + mSource.getPseState() + " Vp State = " + mSource.getVpState()));
+//                        utility.logd(sLogTag, ("PoE Volt: " + mValue + " . " + sValue + " V "));
+//                        utility.logd(sLogTag, ("Pse State = " + mSource.getPseState() + " Vp State = " + mSource.getVpState()));
                         if (screenState) {
                             Message poe_focus_msg = poe_focus_handler.obtainMessage();
                             poe_focus_handler.sendMessage(poe_focus_msg);
@@ -344,6 +349,7 @@ public class PoEIntentService extends IntentService {
 
     final Handler poe_handler = new Handler() {
         public void handleMessage(Message msg) {
+            utility.logd(sLogTag, "Not Full Screen updateFlag = " + updateFlag);
             if (updateFlag) {
                 updateFlag = false;
                 if (pseLevel) {
@@ -360,6 +366,7 @@ public class PoEIntentService extends IntentService {
 
     final Handler poe_focus_handler = new Handler() {
         public void handleMessage(Message msg) {
+            utility.logd(sLogTag, "Full Screen updateFlag = " + updateFlag);
             if (updateFlag) {
                 updateFlag = false;
                 if (pseLevel) {

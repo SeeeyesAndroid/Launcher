@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
+
         doFirst();
         if (getIntent().hasCategory(Intent.CATEGORY_HOME)) {
             Log.i(TAG, "-------------- Run as Launcher --------------");
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ImageButton btn = (ImageButton) findViewById(btnID);
             btn.setOnClickListener(this);
         }
+
 
 
 //    mButton = (Button)findViewById(R.id.asd);
@@ -140,13 +142,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "-------------- Launcher Start --------------");
         super.onResume();
         registerReceiver();
+
     }
 
     @Override
     protected void onPause() {
         Log.d(TAG, "-------------- Launcher Pause --------------");
         super.onPause();
-        unregisterReciver();
     }
 
     private void registerReceiver() {
@@ -169,12 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         this.registerReceiver(this.mReceiver, closeOE);
-    }
-
-    private void unregisterReciver() {
-        if(mReceiver != null) {
-            this.unregisterReceiver(mReceiver);
-        }
     }
 
     private void startService() {
